@@ -7,6 +7,6 @@ const router = Router();
 
 router.post('/login', login);
 router.post('/signup', signup);
-router.get('/validate', validateToken);
+router.post('/validate', validateToken);
 
 module.exports = router;
