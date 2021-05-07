@@ -37,7 +37,7 @@ const login = async (req, res) => {
         if (verifyPassword(value.password, userDoc.password)) {
           const token = generateToken({ id: userDoc.id });
           res.status(200).json({
-            message: "User Created",
+            message: "User Verified",
             token: token,
           });
           return;
