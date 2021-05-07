@@ -19,6 +19,10 @@ const authRouter = require('./src/auth/router');
 
 app.use('/auth', authRouter);
 
+const notesRouter = require('./src/notes/router');
+
+app.use('/notes', notesRouter);
+
 app.get('/' , (req,res) => {
     res.status(200).json({
         message: 'Server Started'
