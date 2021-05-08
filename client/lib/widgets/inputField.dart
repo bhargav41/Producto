@@ -5,11 +5,15 @@ class InputField extends StatefulWidget {
   final TextInputType type;
   final String label;
   final bool obscured;
+  final int minLines;
+  final int maxLines;
   InputField(
       {@required this.controller,
       @required this.label,
       this.type = TextInputType.text,
-      this.obscured = false});
+      this.obscured = false,
+      this.minLines = 1,
+      this.maxLines = 1});
   @override
   _InputFieldState createState() => _InputFieldState();
 }
@@ -20,6 +24,8 @@ class _InputFieldState extends State<InputField> {
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: TextField(
+        minLines: widget.minLines,
+        maxLines: widget.maxLines,
         controller: widget.controller,
         keyboardType: widget.type,
         obscureText: widget.obscured,

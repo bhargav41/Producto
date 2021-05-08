@@ -2,7 +2,7 @@ import 'package:client/pages/signUpPage.dart';
 import 'package:client/pages/todoList.dart';
 import 'package:client/services/authService.dart';
 import 'package:client/services/tokenService.dart';
-import 'package:client/widgets/appBar.dart';
+import 'package:client/widgets/rootAppBar.dart';
 import 'package:client/widgets/inputField.dart';
 import 'package:client/widgets/primaryButton.dart';
 import 'package:client/widgets/secondaryScreen.dart';
@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldState,
-      appBar: CustomAppBar(title: 'Login'),
+      appBar: RootAppBar(title: 'Login'),
       body: _loading
           ? Center(
               child: CircularProgressIndicator(),

@@ -7,6 +7,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leading: CloseButton(),
       iconTheme: IconThemeData(color: Colors.black),
       title: Text(
         title,
