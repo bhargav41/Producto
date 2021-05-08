@@ -25,11 +25,11 @@ jobs:
 
     # Get flutter dependencies.
     - run: flutter pub get
-      working-directory: dart_project
+      working-directory: client
     
     # Build apk.
     - run: flutter build apk
-      working-directory: dart_project
+      working-directory: client
     
     # Upload generated apk to the artifacts.
     - uses: actions/upload-artifact@v1
