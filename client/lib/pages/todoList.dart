@@ -1,6 +1,6 @@
 import 'package:client/pages/notesPage.dart';
 import 'package:client/pages/settingsScreen.dart';
-import 'package:client/widgets/appBar.dart';
+import 'package:client/widgets/rootAppBar.dart';
 import 'package:flutter/material.dart';
 
 class TodoPage extends StatefulWidget {
@@ -12,7 +12,7 @@ class _TodoPageState extends State<TodoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Todo List'),
+      appBar: RootAppBar(title: 'Todo List'),
       endDrawer: Drawer(
         child: ListView(
           children: [
