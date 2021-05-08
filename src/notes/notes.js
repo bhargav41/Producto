@@ -132,8 +132,50 @@ const shareNote = async (req,res) => {
     }
 }
 
+const deleteNote = async (req,res) => {
+    try{
+    const token = req.headers.authorization;
+        if(token === undefined){
+            throw {
+                status: 409,
+                message: 'Auth Failed'
+            }
+        }
+        const decoded = verifyToken(token.slice(7, token.length).trimLeft());
+        const schema = Joi.object({
+            id: Joi.string().required()
+        });
+        const options = {
+            abortEarly: false,
+            allowUnknown: true,
+            stripUnknown: true,
+          };
+          const {value , error} = schema.validate(req.body, options);
+          if(error){
+            LoggerInstance.warn(error);
+            throw{
+                status: 422,
+                message: 'Validation Error'+error.details.map((val) => val.message).join(","),
+            }
+          }
+          else{
+              await notes.findByIdAndDelete(value.id);
+              res.status(200).json({
+                  message: 'Note Deleted'
+              })
+          }
+    }
+    catch(e){
+        LoggerInstance.warn(e)
+        res.status(e.status || 500).json({
+            message: e.message || 'An unexpected error occurred'
+        })
+    }
+}
+
 module.exports = {
     addNote: addNote,
     getNotes: getNotes,
-    shareNote: shareNote
+    shareNote: shareNote,
+    deleteNote: deleteNote
 }
