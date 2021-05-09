@@ -103,8 +103,8 @@ const shareNote = async (req,res) => {
           }
           else{
               const userPersonalDoc = await user.findById(decoded.id);
-              const noteData = await notes.findById(value.id);
-              const finalEmails = noteData.sharedWith;
+              LoggerInstance.info(value.emails)
+              const finalEmails = [];
               for(let email of value.emails){
                   LoggerInstance.info(email)
                   if(email === userPersonalDoc.email || finalEmails.includes(email)){
