@@ -33,7 +33,6 @@ jobs:
     
     # Upload generated apk to the artifacts.
     - uses: actions/upload-artifact@v1
-      working-directory: client
       with:
         name: release-apk
-        path: build/app/outputs/apk/release/app-release.apk
+        path: client/build/app/outputs/apk/release/app-release.apk
