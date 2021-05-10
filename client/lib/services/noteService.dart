@@ -58,4 +58,23 @@ class NotesService {
       return body['message'] ?? 'An unexpected error occured';
     }
   }
+
+  Future<String> shareNote(
+      {@required String token,
+      @required List<dynamic> emails,
+      @required String id}) async {
+    http.Response response = await http.post(api('/notes/share'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $token'
+        },
+        body: jsonEncode({'emails': emails, 'id': id}));
+    Map<String, dynamic> body = jsonDecode(response.body);
+    developer.log('$body', name: 'NoteService');
+    if (response.statusCode == 201) {
+      return body['message'];
+    } else {
+      return body['message'] ?? 'An unexpected error occured';
+    }
+  }
 }

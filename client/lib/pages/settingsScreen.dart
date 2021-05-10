@@ -25,10 +25,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: Text('Sign Out'),
             onTap: () async {
               await context.read<TokenService>().deleteToken();
-              Navigator.pushReplacement(
-                  context,
-                  new MaterialPageRoute(
-                      builder: (BuildContext context) => new LoginPage()));
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/login', (route) => false);
             },
           )
         ],

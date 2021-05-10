@@ -23,6 +23,7 @@ class TokenService with ChangeNotifier, DiagnosticableTreeMixin {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     _token = null;
     await _prefs.clear();
+    notifyListeners();
   }
 
   Future<bool> verifyToken() async {
