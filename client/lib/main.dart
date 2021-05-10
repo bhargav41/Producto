@@ -25,6 +25,7 @@ class _ProductoState extends State<Producto> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {'/login': (BuildContext context) => LoginPage()},
       title: 'Producto',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -38,7 +39,7 @@ class _ProductoState extends State<Producto> {
               return BlankPapge();
             } else {
               developer.log('${snapshot.data}', name: 'Main');
-              if (snapshot.data == true) {
+              if (Provider.of<TokenService>(context).token != null) {
                 return NotesPage();
               } else {
                 return LoginPage();

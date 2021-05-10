@@ -28,6 +28,7 @@ dependencies:
   http: ^0.13.2
   flutter_secure_storage: ^4.2.0
   jiffy: ^4.1.0
+  flutter_boom_menu: ^1.0.2
 
 
   # The following adds the Cupertino Icons font to your application.

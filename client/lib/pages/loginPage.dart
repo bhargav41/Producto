@@ -1,5 +1,5 @@
+import 'package:client/pages/notesPage.dart';
 import 'package:client/pages/signUpPage.dart';
-import 'package:client/pages/todoList.dart';
 import 'package:client/services/authService.dart';
 import 'package:client/services/tokenService.dart';
 import 'package:client/widgets/rootAppBar.dart';
@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                               context,
                               new MaterialPageRoute(
                                   builder: (BuildContext context) =>
-                                      new TodoPage()));
+                                      new NotesPage()));
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text('${result.message}')));
