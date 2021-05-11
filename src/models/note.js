@@ -6,7 +6,8 @@ const notesSchema = mongoose.Schema({
     userId: {type: String, required: true},
     sharedWith: {type: [String], default: []},
     isShared: {type: Boolean, default: false},
-    createdAt: {type: String, default: Date.now(), timestamp: true}
+    createdAt: {type: String, default: Date.now(), timestamp: true},
+    editedAt: {type: String, default: Date.now(), timestamp: true}
 })
 
 const notes = new mongoose.model('notes', notesSchema);
