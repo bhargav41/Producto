@@ -3,6 +3,7 @@ import 'package:client/pages/shareNotePage.dart';
 import 'package:client/services/noteService.dart';
 import 'package:client/services/tokenService.dart';
 import 'package:client/widgets/customAppBar.dart';
+import 'package:client/widgets/inputField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boom_menu/flutter_boom_menu.dart';
 import 'package:provider/provider.dart';
@@ -16,8 +17,10 @@ class NoteDetailsPage extends StatefulWidget {
 
 class _NoteDetailsPageState extends State<NoteDetailsPage> {
   bool _isLoading = false;
+
   @override
   Widget build(BuildContext context) {
+    final _subtitle = TextEditingController(text: widget.note.subtitle);
     return Scaffold(
       appBar: CustomAppBar(
         title: widget.note.title,
@@ -25,10 +28,12 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
       body: !_isLoading
           ? Padding(
               padding: const EdgeInsets.all(15.0),
-              child: Text(widget.note.subtitle.length != null
-                  ? widget.note.subtitle
-                  : 'No Subtitle was provided'),
-            )
+              child: InputField(
+                controller: _subtitle,
+                label: 'Enter Sub Title',
+                minLines: 10,
+                maxLines: 10,
+              ))
           : Center(
               child: CircularProgressIndicator(),
             ),
@@ -47,7 +52,18 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
             subtitle: "Save changes",
             subTitleColor: Colors.white,
             backgroundColor: Colors.black,
-            onTap: () => print('Save'),
+            onTap: () async {
+              setState(() {
+                _isLoading = !_isLoading;
+              });
+              String result = await NotesService().editNote(
+                  title: widget.note.title,
+                  subtitle: _subtitle.text,
+                  id: widget.note.id);
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text('$result')));
+              Navigator.pop(context);
+            },
           ),
           MenuItem(
             child: Icon(Icons.share, color: Colors.white),

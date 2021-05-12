@@ -23,7 +23,7 @@ class _InputFieldState extends State<InputField> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15.0),
-      child: TextField(
+      child: TextFormField(
         minLines: widget.minLines,
         maxLines: widget.maxLines,
         controller: widget.controller,
