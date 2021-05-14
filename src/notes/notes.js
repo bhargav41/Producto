@@ -127,7 +127,7 @@ const shareNote = async (req, res) => {
         }
       }
       LoggerInstance.info(finalEmails);
-      mailgun(finalEmails, `Invitation to Edit ${noteData.title}`, share(userPersonalDoc.email , `Invitation to Edit ${noteData.title}`, `${noteData.title}`))
+      mailgun(finalEmails, `Invitation to Edit ${noteData.title}`, share(userPersonalDoc.email ,  `${noteData.title}`))
       await notes.findByIdAndUpdate(value.id, {
         $set: { sharedWith: finalEmails, isShared: true },
       });
