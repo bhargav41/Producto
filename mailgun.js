@@ -2,18 +2,18 @@ const config = require('./config');
 
 const mailgun = require('mailgun-js')({apiKey: config.apiKey , domain: config.domain});
 
-const data = (email , subject , content) => {
+const data = (emails , subject , content) => {
     return {
-        from: `Team Tech Analogy <notes@${config.domain}>`,
-        to: `${email}`,
+        from: `Team Producto <notes@${config.domain}>`,
+        to: `${emails.map((val) => val).join(",")}`,
         subject: `${subject}`,
         html: `${content}`,
-        'o:tag':['share']
+        'o:tag':[`share ${subject}`]
     }
 }
 
-module.exports = (email , subject , content) => {
-    mailgun.messages().send(data(email , subject , content) , (error , body) => {
+module.exports = (emails , subject , content) => {
+    mailgun.messages().send(data(emails , subject , content) , (error , body) => {
         if(error){
             console.error(`Error : ${error}`);
         }

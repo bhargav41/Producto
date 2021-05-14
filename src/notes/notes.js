@@ -1,9 +1,11 @@
 const e = require("express");
 const Joi = require("joi");
 const LoggerInstance = require("../../logger");
+const mailgun = require("../../mailgun");
 const { verifyToken } = require("../../shared/token");
 const notes = require("../models/note");
 const user = require("../models/user");
+const share = require('../templates/share');
 
 const addNote = async (req, res) => {
   try {
@@ -104,6 +106,13 @@ const shareNote = async (req, res) => {
           error.details.map((val) => val.message).join(","),
       };
     } else {
+      const noteData = await notes.findById(value.id);
+      if(noteData === null){
+        throw{
+          status: 404,
+          message: 'No note exists with given ID'
+        }
+      }
       const userPersonalDoc = await user.findById(decoded.id);
       LoggerInstance.info(value.emails);
       const finalEmails = [];
@@ -118,6 +127,7 @@ const shareNote = async (req, res) => {
         }
       }
       LoggerInstance.info(finalEmails);
+      mailgun(finalEmails, `Invitation to Edit ${noteData.title}`, share(userPersonalDoc.email , `Invitation to Edit ${noteData.title}`, `${noteData.title}`))
       await notes.findByIdAndUpdate(value.id, {
         $set: { sharedWith: finalEmails, isShared: true },
       });
