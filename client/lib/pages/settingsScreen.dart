@@ -1,6 +1,5 @@
-import 'package:client/pages/loginPage.dart';
 import 'package:client/services/tokenService.dart';
-import 'package:client/widgets/rootAppBar.dart';
+import 'package:client/widgets/customAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +12,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: RootAppBar(title: 'Settings'),
+      appBar: CustomAppBar(title: 'Settings'),
       body: ListView(
         children: [
           ListTile(

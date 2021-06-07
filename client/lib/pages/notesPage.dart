@@ -2,7 +2,6 @@ import 'package:client/model/note.dart';
 import 'package:client/pages/addNote.dart';
 import 'package:client/pages/noteDetailPage.dart';
 import 'package:client/pages/settingsScreen.dart';
-import 'package:client/pages/todoList.dart';
 import 'package:client/services/noteService.dart';
 import 'package:client/services/tokenService.dart';
 import 'package:client/widgets/noteTile.dart';
@@ -24,44 +23,16 @@ class _NotesPageState extends State<NotesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: RootAppBar(title: 'Notes'),
-      endDrawer: Drawer(
-        child: ListView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.timer),
-                title: Text('To Do'),
-                onTap: () => Navigator.pushReplacement(
-                    context,
-                    new MaterialPageRoute(
-                        builder: (BuildContext context) => new TodoPage())),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.assignment),
-                title: Text('Assignments'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.settings),
-                title: Text('Settings'),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      new MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              new SettingsScreen()));
-                },
-              ),
-            )
-          ],
-        ),
+      appBar: RootAppBar(
+        title: 'Notes',
+        trailing: [
+          IconButton(
+              icon: Icon(Icons.settings),
+              onPressed: () => Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                      builder: (BuildContext context) => new SettingsScreen())))
+        ],
       ),
       body: FutureBuilder<List<Note>>(
         future: getAllNotes(context),
